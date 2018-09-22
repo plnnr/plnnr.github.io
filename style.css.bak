@@ -18,9 +18,6 @@ html {
     clear: both;
 }
 
-img {
-    max-width: 100px;
-}
 ul {
     list-style: none;
     padding-left: 0;
@@ -35,24 +32,15 @@ p, li, a {
 }
 
 
+.container {
+    display: grid;
+    grid-template: 1fr / 250px 1fr 1fr 1fr;
+}
 
+aside {
+    width: 250px;
+}
 
-
-@media(min-width:600px){
-    
-    aside {
-        width: 200px;
-    }
-    
-    section {
-        width: calc(100% - 200px);
-    }
-    
-    .project {
-        width: 33.33%
-    }
-
-    .container, .portfolio-items {
-        display: flex;
-    }
+main {
+    width: 75%;
 }
