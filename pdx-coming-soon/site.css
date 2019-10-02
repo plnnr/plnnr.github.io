@@ -1,0 +1,75 @@
+@import url(https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css);
+@import url(https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css);
+
+#main {
+    padding: 5px;
+    margin: 10px;
+}
+
+header > h1 {
+    font-size: 6vw;
+}
+
+header > h2 {
+    font-size: 5vw;
+}
+
+
+#mapid {
+    height: 100%;
+}
+
+.dev-popup {
+    font-family: 'Raleway', sans-serif;
+}
+
+#query-form {
+    padding:8px;
+    margin: 10px;
+    background-color: #eee;
+}
+
+#query-form h5 {
+    font-size: 13px;
+    line-height: 1;
+    margin-bottom: 0.5em;
+}
+
+.query-component {
+    padding: 5px;
+    font-size: 11px;
+}
+
+#query-form > input {
+    font-size: 0.5vw;
+}
+
+input {
+    /* padding: 5px; */
+    margin: 0 5px 0 0;
+}
+
+#content {
+    display: grid;
+    grid-template-columns: 3fr 7fr;
+}
+
+/* if screen width is less than 600px, then display like this: */
+@media (max-width:600px) {
+    #content {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    #query-form {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        background-color: #eee;
+        margin: 0px;
+
+    }
+    #mapid {
+        height: 60vh;
+    }
+}
+

@@ -1,0 +1,19 @@
+
+
+This blog is a personal endeavor informed by my professional experiences. I'm a data analyst and urban planner at the Bureau of Planning and Sustainability at the City of Portland. I use R daily to help streamline our data analysis needs and to expand our capacity to go farther and deeper in our analytics and with fewer resources. 
+
+I've seen the benefits that coding with R can bring. The purpose of this blog is to share some of the shortcuts I've found that help make for a faster, easier and more reproducibe analysis. The subject area is primarily the technnical problems that a policy analyst might face, such as profiling the socioeconomic, transportation and environmental conditions of places.
+
+Open data is a personal commitment. Policy analysis fortunately uses mostly publically available data. But sometimes these public datasets are hard to access, extract and analyze data, and understand the results. This blog attempts to explain many of the key datasets used by policy analysts. These include:
+* Decennial Census and the American Community Survey (ACS) for sociodemographic information.
+* Longitudinal Employer-Household Dynamics (LEHD), including the LEHD Origin-Destination Employment Statistics (LODES) to explore transportation and employment patterns.
+* Public Use Microdata Samples (PUMS) from the Census Bureau and the folks at [IPUMS](https://ipums.org/).
+* Bureau of Labor Statistics (BLS) for industry, occupation and employment information.
+* Comprehensive Housing Affordability Strategy (CHAS) data from HUD for exploring household income and demographics related to housing.
+
+I routinely use data sources that are third-party or proprietary. These sources of information help inform policy choices, so I will cover them to demonstrate how they can be used.
+
+I'm an advocate for using the most appropriate tool. Sometimes the most appropriate tool is not R. Since this blog is primarily about tooling the analyst, it will frequently cover topics in Excel, python or other softwares that I routeinely use.
+
+Last, I'm not a statistician or economist. I will make mistakes in this blog that might embarrass me later in my career. But I don't want this fear to be an impediment to getting content out there. If you notice a mistake, please [sending me a note](mailto:nicholas.kobel@gmail.com). 
+
