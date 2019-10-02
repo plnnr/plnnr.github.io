@@ -70,8 +70,8 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={
 // Get the value of a radio button selected
 function getRadioValue(name) {
     const options = document.getElementsByName(name);
-    for(let i = 0; i < options.length; i++) {
-        if(options[i].checked) {
+    for (let i = 0; i < options.length; i++) {
+        if (options[i].checked) {
             return options[i].value
         }
     }
@@ -79,7 +79,7 @@ function getRadioValue(name) {
 
 // Pad a number with leading zeros
 function pad(num, size) {
-    let s = num+"";
+    let s = num + "";
     while (s.length < size) s = "0" + s
     return s;
 };
@@ -87,14 +87,14 @@ function pad(num, size) {
 // Return day/date as text
 function getDateText(dateObject) {
     let date = dateObject.getDate();
-    let month = dateObject.getMonth()+1;
+    let month = dateObject.getMonth() + 1;
     let year = dateObject.getFullYear();
     let dateText = `${month}/${date}/${year}`;
     return dateText;
 };
 
 // Create an array that stores a date object, a human-readable interpretation, and a SQL-ready query string
-function getLookbackCriterion(lookbackSelection) { 
+function getLookbackCriterion(lookbackSelection) {
     let returnArray = []; // Create empty array that will take a lookback Date object timestamp, the SQL query-ready format, and a human-readable format
     let oneDay = 24 * 60 * 60 * 1000;
     let now = new Date();
@@ -135,7 +135,7 @@ function getIssuanceQueryString(lookbackQueryString, statusValue) {
 }
 
 function getIssuanceDate(selectedOptions, featureObject) {
-    if (selectedOptions.issuance === "review"){
+    if (selectedOptions.issuance === "review") {
         let d = new Date(featureObject.INTAKECOMPLETEDATE);
         return getDateText(d)
     } else if (selectedOptions.issuance == "issued") {
@@ -159,7 +159,7 @@ function getDevTypeQueryString(devList) {
     if (devList.includes("duplex")) {
         queryList.push("Duplex")
     }
-    
+
     let queryString = `"TYPE" IN (`;
     queryList.forEach(function(devtype) {
         queryString += `'${devtype}', `;
@@ -171,10 +171,10 @@ function getDevTypeQueryString(devList) {
 // Build the query parameters for a URL string
 function buildQueryParams(params) {
     let paramString = "query?"
-    for(key in params) {
+    for (key in params) {
         paramString += `${key}=${params[key]}&`
     }
-    return paramString//.slice(0, paramString.length - 1)
+    return paramString //.slice(0, paramString.length - 1)
 }
 
 // Build and encode the URL to fetch the data
@@ -190,7 +190,7 @@ let developments = null;
 ///////// Main event listener /////////
 formQueryForm.addEventListener('submit', function(e) {
     event.preventDefault(e);
-    if(developments) {
+    if (developments) {
         developments.clearLayers();
     }
 
@@ -201,14 +201,14 @@ formQueryForm.addEventListener('submit', function(e) {
     };
     console.log(selectedOptions);
     inputCheckBoxes.forEach(function(checkbox) {
-        if(checkbox.checked) {
+        if (checkbox.checked) {
             selectedOptions.developmentTypes.push(checkbox.value)
         }
     });
 
     let devTypeQueryString = getDevTypeQueryString(selectedOptions.developmentTypes);
     let lookbackDate = getLookbackCriterion(selectedOptions.lookback)[2];
-    let issuanceQueryString = getIssuanceQueryString(lookbackDate,selectedOptions.issuance);
+    let issuanceQueryString = getIssuanceQueryString(lookbackDate, selectedOptions.issuance);
     let whereString = issuanceQueryString + " AND " + devTypeQueryString;
     myparams.where = whereString;
     let queryParams = buildQueryParams(myparams);
@@ -226,9 +226,12 @@ formQueryForm.addEventListener('submit', function(e) {
 
         var developmentMarkers = [];
         // Iterate over responses, pull out relevant attributes
-        for (let i=0; i<rspRes.features.length; i++) {
+        for (let i = 0; i < rspRes.features.length; i++) {
             let feature = rspRes.features[i];
             let fAttributes = feature.attributes;
+            if (fAttributes.GIS_LOCATION_TYPE === "NO LOCATION") {
+                continue
+            }
             let fGeom = feature.geometry;
             let xcoord = fGeom.x;
             let ycoord = fGeom.y;
@@ -246,9 +249,9 @@ formQueryForm.addEventListener('submit', function(e) {
             if (houseNumber != null) {
                 address = `${houseNumber} ${stDirection} ${stName} ${stType}`;
             }
-            
+
             var marker = L.marker([ycoord, xcoord]);
-            marker.bindPopup(   `<div class="dev-popup"><h5>${address}</h5>
+            marker.bindPopup(`<div class="dev-popup"><h5>${address}</h5>
                                 <p><b>Type: </b>${devtypeAttr}</p>
                                 <p><b>Status date: </b>${getIssuanceDate(selectedOptions,fAttributes)}</p>
                                 <p><b>Square feet: </b>${devSqft}</p>
@@ -256,7 +259,7 @@ formQueryForm.addEventListener('submit', function(e) {
                                 <small>${description.toLowerCase()}</small>
                                 <p><a href="${URL}">View in Portland Maps</a></p></div>`);
             developmentMarkers.push(marker);
-            
+
         }
         developments = L.layerGroup(developmentMarkers);
         developments.addTo(mymap);
